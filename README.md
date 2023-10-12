@@ -1,4 +1,4 @@
-in this file we will get to know, how we can Installed and configured a Redhat-based web server.
+In this file we will get to know, how we can Installed and configured a Redhat-based web server.
 <p>
 - Created user accounts and managed permissions.
   <p>
