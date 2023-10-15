@@ -17,11 +17,10 @@ Steps:
 
 1. Configure Static IP Addresses on RHEL 9:
 
-Edit the network configuration file for the server:
-
+-Edit the network configuration file for the server:
 sudo nano /etc/sysconfig/network-scripts/ifcfg-eth0
 
-Add the following lines (modify the IP address and other settings based on your network requirements):
+-Add the following lines (modify the IP address and other settings based on your network requirements):
 
 TYPE=Ethernet
 DEVICE=eth0
@@ -30,20 +29,18 @@ IPADDR=192.168.1.1
 NETMASK=255.255.255.0
 ONBOOT=yes
 
-Restart the network service:
-
+-Restart the network service:
 sudo systemctl restart network
 
 2. Set Up DHCP Server:
 
-Install the DHCP package:
-
+-Install the DHCP package:
 sudo dnf install dhcp-server
  
 Edit the DHCP configuration file:
 sudo nano /etc/dhcp/dhcpd.conf
 
-Add the DHCP configuration (modify the IP address range and subnet mask):
+-Add the DHCP configuration (modify the IP address range and subnet mask):
 
 subnet 192.168.1.0 netmask 255.255.255.0 {
   range 192.168.1.100 192.168.1.200;
@@ -54,18 +51,15 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 }
 
 Enable and start the DHCP service:
-
 sudo systemctl enable dhcpd
 sudo systemctl start dhcpd
 
 3. Configure DNS:
 
-Edit the DNS resolver configuration file:
-
+-Edit the DNS resolver configuration file:
 sudo nano /etc/resolv.conf
 
-Add DNS server addresses (for example, Google's public DNS):
-
+-Add DNS server addresses (for example, Google's public DNS):
 nameserver 8.8.8.8
 nameserver 8.8.4.4
 
@@ -75,16 +69,13 @@ On the client machines, configure static IP addresses or set them to obtain IP a
 
 5. Network Troubleshooting:
 
-Check Connectivity: Use ping to check connectivity between machines.
-
+-Check Connectivity: Use ping to check connectivity between machines.
 ping 192.168.1.1  # Replace with the IP address of the server
 
-Check DNS Resolution: Use nslookup to check DNS resolution.
-
+-Check DNS Resolution: Use nslookup to check DNS resolution.
 nslookup example.com  # Replace with the domain you want to resolve
 
-Check DHCP Lease: On the client machines, check if they received an IP address from the DHCP server.
-
-ip a
+-Check DHCP Lease: On the client machines, check if they received an IP address from the DHCP server.
+ ip a
 
 These steps provide a basic setup for a small LAN with Linux-based servers and client machines. Adjust the configurations based on your specific network requirements and hardware setup. Remember, network troubleshooting often involves using tools like ping, traceroute, nslookup, and checking system logs (/var/log/messages and /var/log/syslog).
